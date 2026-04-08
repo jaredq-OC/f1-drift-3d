@@ -43,6 +43,7 @@ export class SkidMarks {
       transparent: true,
       depthWrite: false,
       blending: THREE.MultiplyBlending,
+      premultipliedAlpha: true,
     })
 
     this.mesh = new THREE.LineSegments(this.geo, mat)

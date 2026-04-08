@@ -11,9 +11,11 @@ export class CarMesh {
 
   private buildMesh(): void {
     const bodyMat = new THREE.MeshStandardMaterial({
-      color: 0x1a1a1f,
-      metalness: 0.8,
-      roughness: 0.3,
+      color: 0xcc1122,
+      metalness: 0.85,
+      roughness: 0.2,
+      emissive: 0x220000,
+      emissiveIntensity: 0.1,
     })
 
     const accentMat = new THREE.MeshStandardMaterial({

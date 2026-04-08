@@ -155,6 +155,10 @@ export class SmokeSystem {
     this.geo.setAttribute('aSeed', new THREE.BufferAttribute(this.seeds, 1))
 
     this.mat = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uSizeScale: { value: 1.0 },
+      },
       vertexShader: VERTEX_SHADER,
       fragmentShader: FRAGMENT_SHADER,
       transparent: true,

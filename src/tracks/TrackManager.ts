@@ -18,8 +18,8 @@ export const TRACKS: Record<string, TrackConfig> = {
   night: {
     id: 'night',
     name: 'Night Circuit',
-    groundColor: 0x1a1a1f,
-    fogColor: 0x0a0a1a,
+    groundColor: 0x1c1c2e,
+    fogColor: 0x0d0d1a,
     fogDensity: 0.018,
     skyColorTop: 0x050510,
     skyColorHorizon: 0x1a0a30,

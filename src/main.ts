@@ -31,14 +31,17 @@ class F1DriftApp {
   private lastHandbrake: boolean = false
 
   constructor() {
+    // DEBUG
+    ;(window as any).__f1app = this
+
     // Renderer
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false })
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true })
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping
-    this.renderer.toneMappingExposure = 1.2
+    this.renderer.toneMappingExposure = 2.0
 
     const container = document.getElementById('canvas-container')
     if (container) container.appendChild(this.renderer.domElement)
@@ -208,7 +211,9 @@ class F1DriftApp {
     )
 
     // Render
-    this.postProcessing.render()
+    // postProcessing.render()
+    this.renderer.render(this.scene, this.camera.camera)
+    this.postProcessing.composer.render()
   }
 
   start(): void {
@@ -218,5 +223,5 @@ class F1DriftApp {
 }
 
 // Boot
-const app = new F1DriftApp()
+const app: F1DriftApp = new F1DriftApp()
 app.start()
