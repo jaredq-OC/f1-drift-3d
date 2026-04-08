@@ -40,8 +40,8 @@ class F1DriftApp {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping
-    this.renderer.toneMappingExposure = 2.0
+    this.renderer.toneMapping = THREE.NoToneMapping
+    this.renderer.toneMappingExposure = 1.0
 
     const container = document.getElementById('canvas-container')
     if (container) container.appendChild(this.renderer.domElement)
@@ -49,6 +49,18 @@ class F1DriftApp {
     // Scene
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0x050510)
+
+    // Ambient fill light — gives metallic surfaces something to reflect
+    const ambientFill = new THREE.AmbientLight(0x222233, 0.4)
+    this.scene.add(ambientFill)
+
+    // Directional light for shadow casting and car visibility
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.6)
+    dirLight.position.set(10, 20, 10)
+    dirLight.castShadow = true
+    dirLight.shadow.mapSize.width = 1024
+    dirLight.shadow.mapSize.height = 1024
+    this.scene.add(dirLight)
 
     // Camera
     this.camera = new ChaseCamera(window.innerWidth / window.innerHeight)

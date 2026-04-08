@@ -4,8 +4,8 @@ export class ChaseCamera {
   camera: THREE.PerspectiveCamera
   private currentPos: THREE.Vector3 = new THREE.Vector3(0, 5, 10)
   private currentLook: THREE.Vector3 = new THREE.Vector3(0, 0, 0)
-  private readonly dist: number = 8
-  private readonly height: number = 3.5
+  private readonly dist: number = 5
+  private readonly height: number = 2.5
   private readonly lookAhead: number = 3
 
   constructor(aspect: number) {

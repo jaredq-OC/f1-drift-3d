@@ -18,40 +18,40 @@ export const TRACKS: Record<string, TrackConfig> = {
   night: {
     id: 'night',
     name: 'Night Circuit',
-    groundColor: 0x1c1c2e,
+    groundColor: 0x1a1a2e,
     fogColor: 0x0d0d1a,
-    fogDensity: 0.018,
+    fogDensity: 0.006,
     skyColorTop: 0x050510,
     skyColorHorizon: 0x1a0a30,
-    ambientIntensity: 0.15,
-    spotlightColor: 0x8888ff,
-    spotlightIntensity: 2.5,
+    ambientIntensity: 0.8,
+    spotlightColor: 0xaaaaff,
+    spotlightIntensity: 8.0,
     spotlightPos: [0, 30, 0],
   },
   dusk: {
     id: 'dusk',
     name: 'Dusk Highway',
-    groundColor: 0x2a2520,
+    groundColor: 0x3a3028,
     fogColor: 0x3a2010,
-    fogDensity: 0.012,
+    fogDensity: 0.004,
     skyColorTop: 0x1a0a20,
     skyColorHorizon: 0xff6030,
-    ambientIntensity: 0.25,
+    ambientIntensity: 0.4,
     spotlightColor: 0xffaa55,
-    spotlightIntensity: 2.0,
+    spotlightIntensity: 4.0,
     spotlightPos: [0, 25, 0],
   },
   industrial: {
     id: 'industrial',
     name: 'Industrial Zone',
-    groundColor: 0x2a2a28,
+    groundColor: 0x3a3a38,
     fogColor: 0x3a2010,
-    fogDensity: 0.025,
+    fogDensity: 0.008,
     skyColorTop: 0x101010,
     skyColorHorizon: 0x3a2a10,
-    ambientIntensity: 0.2,
+    ambientIntensity: 0.3,
     spotlightColor: 0xff8844,
-    spotlightIntensity: 2.2,
+    spotlightIntensity: 4.0,
     spotlightPos: [0, 22, 0],
   },
 }
@@ -87,8 +87,8 @@ export class TrackManager {
     this.groundMesh.receiveShadow = true
     this.scene.add(this.groundMesh)
 
-    // Grid lines on ground
-    const gridHelper = new THREE.GridHelper(400, 80, 0x222222, 0x1a1a1a)
+    // Grid lines on ground — high contrast against dark ground for readability
+    const gridHelper = new THREE.GridHelper(400, 80, 0x6666cc, 0x444466)
     gridHelper.position.y = 0.01
     this.scene.add(gridHelper)
 
@@ -149,18 +149,9 @@ export class TrackManager {
     this.skyMesh = new THREE.Mesh(skyGeo, skyMat)
     this.scene.add(this.skyMesh)
 
-    // Additional side spotlights for atmosphere
-    const sideSpot1 = new THREE.SpotLight(config.spotlightColor, config.spotlightIntensity * 0.5, 0, Math.PI / 5, 0.5, 1.0)
-    sideSpot1.position.set(40, 20, 40)
-    sideSpot1.target.position.set(0, 0, 0)
-    this.scene.add(sideSpot1)
-    this.scene.add(sideSpot1.target)
-
-    const sideSpot2 = new THREE.SpotLight(config.spotlightColor, config.spotlightIntensity * 0.5, 0, Math.PI / 5, 0.5, 1.0)
-    sideSpot2.position.set(-40, 20, -40)
-    sideSpot2.target.position.set(0, 0, 0)
-    this.scene.add(sideSpot2)
-    this.scene.add(sideSpot2.target)
+    // Hemisphere light — sky/ground ambient for better base illumination
+    const hemiLight = new THREE.HemisphereLight(0x1a1a40, 0x080818, 0.5)
+    this.scene.add(hemiLight)
   }
 
   setTrack(id: string): void {

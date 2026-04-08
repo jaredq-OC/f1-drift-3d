@@ -46,9 +46,9 @@ export class PostProcessing {
     // Bloom for brake lights and emissive elements
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
-      0.6,   // strength
+      1.2,   // strength — was 0.6, needs to punch through on dark scene
       0.4,   // radius
-      0.8    // threshold
+      0.3    // threshold — was 0.8, lower so dim emissive elements bloom
     )
     this.composer.addPass(bloomPass)
 

@@ -10,20 +10,12 @@ export class CarMesh {
   }
 
   private buildMesh(): void {
-    const bodyMat = new THREE.MeshStandardMaterial({
-      color: 0xcc1122,
-      metalness: 0.85,
-      roughness: 0.2,
-      emissive: 0x220000,
-      emissiveIntensity: 0.1,
+    const bodyMat = new THREE.MeshBasicMaterial({
+      color: 0xff2244,
     })
 
-    const accentMat = new THREE.MeshStandardMaterial({
-      color: 0xe03030,
-      metalness: 0.6,
-      roughness: 0.4,
-      emissive: 0x800000,
-      emissiveIntensity: 0.3,
+    const accentMat = new THREE.MeshBasicMaterial({
+      color: 0xff4444,
     })
 
     const whiteMat = new THREE.MeshStandardMaterial({
@@ -38,10 +30,8 @@ export class CarMesh {
       roughness: 0.9,
     })
 
-    const darkMat = new THREE.MeshStandardMaterial({
-      color: 0x111111,
-      metalness: 0.5,
-      roughness: 0.5,
+    const darkMat = new THREE.MeshBasicMaterial({
+      color: 0xbbbbbb,
     })
 
     // === Main chassis body ===
@@ -111,7 +101,7 @@ export class CarMesh {
 
     // === Cockpit halo ===
     const haloGeo = new THREE.TorusGeometry(0.22, 0.03, 8, 16, Math.PI)
-    const haloMat = new THREE.MeshStandardMaterial({ color: 0x333333, metalness: 0.8, roughness: 0.2 })
+    const haloMat = new THREE.MeshBasicMaterial({ color: 0xcccccc })
     const halo = new THREE.Mesh(haloGeo, haloMat)
     halo.position.set(0, 0.65, -0.2)
     halo.rotation.x = Math.PI / 2
@@ -158,14 +148,22 @@ export class CarMesh {
     this.brakeLights.push(blR)
     this.group.add(blR)
 
-    // === Accent stripes ===
-    const stripeGeo = new THREE.BoxGeometry(0.05, 0.02, 3.5)
-    const stripeL = new THREE.Mesh(stripeGeo, accentMat)
-    stripeL.position.set(-0.52, 0.53, 0)
+    // Emissive accent stripe — thin bright strip on car sides for visual pop
+    const stripeGeo = new THREE.BoxGeometry(0.04, 0.08, 3.5)
+    const stripeMat = new THREE.MeshBasicMaterial({ color: 0xff4488 })
+    const stripeL = new THREE.Mesh(stripeGeo, stripeMat)
+    stripeL.position.set(-0.52, 0.55, 0)
     this.group.add(stripeL)
     const stripeR = stripeL.clone()
-    stripeR.position.set(0.52, 0.53, 0)
+    stripeR.position.set(0.52, 0.55, 0)
     this.group.add(stripeR)
+
+    // Emissive top-edge stripe — thin line along top of body
+    const topStripeGeo = new THREE.BoxGeometry(0.96, 0.03, 4.0)
+    const topStripeMat = new THREE.MeshBasicMaterial({ color: 0xff3366 })
+    const topStripe = new THREE.Mesh(topStripeGeo, topStripeMat)
+    topStripe.position.set(0, 0.53, 0)
+    this.group.add(topStripe)
 
     // Ground shadow plane
     const shadowGeo = new THREE.PlaneGeometry(2.5, 5)
@@ -179,6 +177,11 @@ export class CarMesh {
     shadow.rotation.x = -Math.PI / 2
     shadow.position.y = 0.01
     this.group.add(shadow)
+
+    // Attach a point light to the car so it glows
+    const carLight = new THREE.PointLight(0xff2244, 3.0, 8)
+    carLight.position.set(0, 1.0, 0)
+    this.group.add(carLight)
   }
 
   update(state: { heading: number; position: { x: number; z: number }; throttle: number; handbrake: boolean }): void {
