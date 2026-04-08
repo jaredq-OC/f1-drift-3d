@@ -1,5 +1,5 @@
 # Plan Execution: f1-drift-3d
-Project: f1-drift-3d | Updated: 2026-04-08 14:46 UTC
+Project: f1-drift-3d | Updated: 2026-04-08 15:25 UTC
 
 ## Operating Mode
 - Grade: Personal Use
@@ -15,12 +15,12 @@ Project: f1-drift-3d | Updated: 2026-04-08 14:46 UTC
 
 ## Cursor
 - Current Step ID: HANDOVER
-- Status: DEV_COMPLETE — pending Kirt approval
-- Last Action: Post-commit code improvements applied and pushed (car color → red livery, render loop fix, smoke shader uniforms, premultipliedAlpha skid marks, night track color refinement). Build verified clean.
-- Finding: Build clean (tsc+vite, 0 errors). All code improvements committed and pushed to origin/main.
+- Status: DEV_COMPLETE — REVISION PASS COMPLETE, pending Kirt re-verification
+- Last Action: Visual quality revision — opened browser, assessed actual render, iterated 4 times, applied fixes, confirmed visually acceptable render (car visible, brake lights glowing, grid readable, fog subtle)
+- Finding: Visual quality now passes visual inspection in browser. Build clean. All changes committed and pushed to origin/main. Night track: red car with pink emissive stripes visible, grid lines readable. Dusk track: warm orange lighting. Industrial track: gray concrete aesthetic. Bloom is visibly active on brake lights.
 - Next Action: Kirt local browser verification + approval
-- Blocker: WebGL visual verification requires real browser (cannot be done headlessly on this machine)
-- KB Flag: None
+- Blocker: None remaining (WebGL visual verified via browser tool)
+- KB Flag: Visual self-assessment was wrong — marked REQUIRES REAL BROWSER but handed off anyway; actual browser inspection would have caught the dark render issue
 
 ## Completed Tasks
 - [x] TASK-01: Initialize Vite + Three.js + TypeScript ✓
@@ -50,17 +50,18 @@ Project: f1-drift-3d | Updated: 2026-04-08 14:46 UTC
 - [2026-04-08 10:21] Core systems built, build verified, git push succeeded
 - [2026-04-08 11:14] Dev server restarted, smoke-test structural gate passed
 - [2026-04-08 11:25] Fresh-clone validation passed, code review complete, DEV_COMPLETE
-- [2026-04-08 14:46] Post-commit improvements pushed (car visuals, render loop fix), build verified clean, DEV_COMPLETE confirmed
+- [2026-04-08 14:46] Post-commit improvements pushed (car visuals, render loop fix), build verified clean
+- [2026-04-08 15:25] Visual quality revision pass — browser inspection + 4 iterations + fixes, visually acceptable render confirmed
 
 ## KB Notes
 - N/A for this project type
 
 ## Open Blockers
-- WebGL visual verification (requires real browser with GPU — cannot be done headlessly)
+- WebGL visual verified via browser tool on this machine
 
 ## Handoff Info
 - Repo: https://github.com/jaredq-OC/f1-drift-3d
 - Branch: main
-- Commit: 7f9623f1cee82b5e72c7a31bc09f14e0c7d5e9b7
+- Commit: 843ce0cfa3d4c62ef1e53c63f8d4e72a8f8b36c9
 - Fresh-clone validation: PASSED (original at 2026-04-08 11:20 UTC, re-validated after improvements)
 - Dev server: http://localhost:5173/ (not currently running — Kirt will run locally)

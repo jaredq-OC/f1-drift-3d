@@ -11,7 +11,7 @@ export class CarMesh {
 
   private buildMesh(): void {
     const bodyMat = new THREE.MeshBasicMaterial({
-      color: 0xff2244,
+      color: 0xff1133,
     })
 
     const accentMat = new THREE.MeshBasicMaterial({
@@ -170,7 +170,7 @@ export class CarMesh {
     const shadowMat = new THREE.MeshBasicMaterial({
       color: 0x000000,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.15,
       depthWrite: false,
     })
     const shadow = new THREE.Mesh(shadowGeo, shadowMat)
@@ -179,7 +179,7 @@ export class CarMesh {
     this.group.add(shadow)
 
     // Attach a point light to the car so it glows
-    const carLight = new THREE.PointLight(0xff2244, 3.0, 8)
+    const carLight = new THREE.PointLight(0xff0033, 6.0, 15)
     carLight.position.set(0, 1.0, 0)
     this.group.add(carLight)
   }

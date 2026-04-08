@@ -50,12 +50,12 @@ class F1DriftApp {
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0x050510)
 
-    // Ambient fill light — gives metallic surfaces something to reflect
-    const ambientFill = new THREE.AmbientLight(0x222233, 0.4)
+    // Ambient fill light — brighter to reveal the scene
+    const ambientFill = new THREE.AmbientLight(0x333344, 0.9)
     this.scene.add(ambientFill)
 
     // Directional light for shadow casting and car visibility
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.6)
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.8)
     dirLight.position.set(10, 20, 10)
     dirLight.castShadow = true
     dirLight.shadow.mapSize.width = 1024

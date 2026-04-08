@@ -8,8 +8,8 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 const VignetteShader = {
   uniforms: {
     tDiffuse: { value: null as THREE.Texture | null },
-    offset: { value: 1.0 },
-    darkness: { value: 1.2 },
+    offset: { value: 0.8 },
+    darkness: { value: 0.6 },
   },
   vertexShader: `
     varying vec2 vUv;

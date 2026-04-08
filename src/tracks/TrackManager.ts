@@ -18,40 +18,40 @@ export const TRACKS: Record<string, TrackConfig> = {
   night: {
     id: 'night',
     name: 'Night Circuit',
-    groundColor: 0x1a1a2e,
-    fogColor: 0x0d0d1a,
-    fogDensity: 0.006,
+    groundColor: 0x686888,
+    fogColor: 0x0a0a20,
+    fogDensity: 0.0008,
     skyColorTop: 0x050510,
     skyColorHorizon: 0x1a0a30,
-    ambientIntensity: 0.8,
+    ambientIntensity: 1.8,
     spotlightColor: 0xaaaaff,
-    spotlightIntensity: 8.0,
+    spotlightIntensity: 20.0,
     spotlightPos: [0, 30, 0],
   },
   dusk: {
     id: 'dusk',
     name: 'Dusk Highway',
-    groundColor: 0x3a3028,
-    fogColor: 0x3a2010,
-    fogDensity: 0.004,
+    groundColor: 0x5a4a40,
+    fogColor: 0x2a1810,
+    fogDensity: 0.003,
     skyColorTop: 0x1a0a20,
     skyColorHorizon: 0xff6030,
-    ambientIntensity: 0.4,
+    ambientIntensity: 0.8,
     spotlightColor: 0xffaa55,
-    spotlightIntensity: 4.0,
+    spotlightIntensity: 6.0,
     spotlightPos: [0, 25, 0],
   },
   industrial: {
     id: 'industrial',
     name: 'Industrial Zone',
-    groundColor: 0x3a3a38,
-    fogColor: 0x3a2010,
-    fogDensity: 0.008,
+    groundColor: 0x585858,
+    fogColor: 0x201510,
+    fogDensity: 0.005,
     skyColorTop: 0x101010,
     skyColorHorizon: 0x3a2a10,
-    ambientIntensity: 0.3,
+    ambientIntensity: 0.7,
     spotlightColor: 0xff8844,
-    spotlightIntensity: 4.0,
+    spotlightIntensity: 6.0,
     spotlightPos: [0, 22, 0],
   },
 }
@@ -79,16 +79,16 @@ export class TrackManager {
     const groundGeo = new THREE.PlaneGeometry(800, 800)
     const groundMat = new THREE.MeshStandardMaterial({
       color: config.groundColor,
-      roughness: 0.9,
-      metalness: 0.05,
+      roughness: 0.85,
+      metalness: 0.1,
     })
     this.groundMesh = new THREE.Mesh(groundGeo, groundMat)
     this.groundMesh.rotation.x = -Math.PI / 2
     this.groundMesh.receiveShadow = true
     this.scene.add(this.groundMesh)
 
-    // Grid lines on ground — high contrast against dark ground for readability
-    const gridHelper = new THREE.GridHelper(400, 80, 0x6666cc, 0x444466)
+    // Grid lines on ground — subtle reference grid, not dominant
+    const gridHelper = new THREE.GridHelper(400, 20, 0x8888bb, 0x555577)
     gridHelper.position.y = 0.01
     this.scene.add(gridHelper)
 
@@ -150,7 +150,7 @@ export class TrackManager {
     this.scene.add(this.skyMesh)
 
     // Hemisphere light — sky/ground ambient for better base illumination
-    const hemiLight = new THREE.HemisphereLight(0x1a1a40, 0x080818, 0.5)
+    const hemiLight = new THREE.HemisphereLight(0x2222aa, 0x0a0a20, 1.0)
     this.scene.add(hemiLight)
   }
 
